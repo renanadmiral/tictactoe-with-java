@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class GameEngine {
     private boolean isPlayerXTurn = true;
-    private int lineChosen;
+    private int rowChosen;
     private int columnChosen;
     private final Board board = new Board();
     private final Scanner scanner = new Scanner(System.in);
@@ -16,10 +16,10 @@ public class GameEngine {
             this.board.renderBoard();
             if (!validMove) System.out.printf("Oops, movimento inválido! Por favor, repita novamente.%n%n");
             System.out.println("Jogador " + player + " escolha a linha que você deseja jogar");
-            this.lineChosen = (scanner.nextInt() - 1);
+            this.rowChosen = (scanner.nextInt() - 1);
             System.out.println("Jogador " + player + " escolha a coluna que você deseja jogar");
             this.columnChosen = (scanner.nextInt() - 1);
-            validMove = this.board.validateMove(this.lineChosen, this.columnChosen);
+            validMove = this.board.validateMove(this.rowChosen, this.columnChosen);
         }
         while (!validMove);
     }
@@ -79,12 +79,10 @@ public class GameEngine {
         while (!endedGame) {
             for (int i = 1; i <=2; i++) {
                 char player = this.isPlayerXTurn ? 'X' : 'O';
-                int line = 0;
-                int column = 0;
 
                 this.listenPlayers(player);
 
-                this.board.setElement(this.lineChosen, this.columnChosen, player);
+                this.board.setElement(this.rowChosen, this.columnChosen, player);
 
                 endedGame = checkWinner();
                 if (endedGame) break;

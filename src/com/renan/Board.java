@@ -1,25 +1,24 @@
 package com.renan;
 
-import java.sql.Array;
 import java.util.Arrays;
 
 public class Board {
     private final char[][] elements = new char[3][3];
 
-    public void setElement(int line, int column, char player) {
-        this.elements[line][column] = player;
+    public void setElement(int row, int column, char player) {
+        this.elements[row][column] = player;
     }
 
-    public String getLineElements(int line,int column, int line2,int column2, int line3,int column3) {
+    public String getLineElements(int row,int column, int row2,int column2, int row3,int column3) {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.elements[line][column]).append(this.elements[line2][column2]).append(this.elements[line3][column3]);
+        sb.append(this.elements[row][column]).append(this.elements[row2][column2]).append(this.elements[row3][column3]);
         return sb.toString();
     }
 
-    public boolean validateMove(int line, int column) {
-        int[] desiredPositions = {0, 1, 2};
-        if (Arrays.stream(desiredPositions).noneMatch(x -> x == line || x == column)) return false;
-        if (this.elements[line][column] != 0)  return false;
+    public boolean validateMove(int row, int column) {
+        final int[] desiredPositions = {0, 1, 2};
+        if (Arrays.stream(desiredPositions).noneMatch(x -> x == row || x == column)) return false;
+        if (this.elements[row][column] != 0)  return false;
         return true;
     }
 
